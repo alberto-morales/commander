@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    					http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+
+  <jaxrs:server id="serverservice" address="/services">
+	    <jaxrs:serviceBeans>
+	      <ref bean="serverServiceImpl" />
+	    </jaxrs:serviceBeans>
+		<jaxrs:providers>
+            <bean class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
+                <property name="dropRootElement" value="true" />
+                <property name="serializeAsArray" value="true" />
+                <property name="dropCollectionWrapperElement" value="true" />
+            </bean>
+		</jaxrs:providers>
+  </jaxrs:server>
+
+    <bean id="catalog" class="com.hpe.commander.model.impl.CatalogImpl" >
+        <property name="configuration" ref="configurationUtil" />
+    </bean>
+
+    <bean id="serverBuilder" class="com.hpe.commander.services.builder.impl.ServerBuilder" />
+
+    <bean id="configurationUtil" class="com.hpe.commander.util.impl.ConfigurationImpl" />
+
+    <bean id="serverServiceImpl" class="com.hpe.commander.services.rest.ServerService">
+        <property name="catalog" ref="catalog" />
+    	<property name="builder" ref="serverBuilder" />
+    </bean>
+
+</beans>
