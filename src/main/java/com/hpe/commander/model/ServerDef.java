@@ -1,6 +1,6 @@
 package com.hpe.commander.model;
 
-public interface ServerConfig {
+public interface ServerDef {
 
 	/**
 	 * @return server's ID
@@ -13,22 +13,6 @@ public interface ServerConfig {
 	public abstract String getDescription();
 
 	/**
-	 * @return server's address
-	 */
-	public abstract String getAddress();
-
-	/**
-	 * @return server's administrative username
-	 */
-	public abstract String getUsername();
-
-
-	/**
-	 * @return server's administrative password
-	 */
-	public abstract String getPassword();
-
-	/**
 	 * @return start script (full path)
 	 */
 	public abstract String getStartScript();
@@ -37,5 +21,10 @@ public interface ServerConfig {
 	 * @return stop script (full path)
 	 */
 	public abstract String getStopScript();
+
+	/**
+	 * @return Host Configuration
+	 */
+	public abstract HostConfig getHostConfig();
 
 }

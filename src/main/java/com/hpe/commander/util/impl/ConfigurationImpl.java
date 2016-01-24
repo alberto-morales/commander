@@ -12,15 +12,15 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.hpe.commander.model.ServerConfig;
-import com.hpe.commander.model.impl.ServerConfigImpl;
+import com.hpe.commander.model.ServerDef;
+import com.hpe.commander.model.impl.ServerDefImpl;
 import com.hpe.commander.util.Configuration;
 
 public class ConfigurationImpl implements Configuration {
 
 	@Override
-	public Map<String, ServerConfig> getServerDefinitions() {
-		Map<String, ServerConfig> result = new HashMap<String, ServerConfig>();
+	public Map<String, ServerDef> getServerDefinitions() {
+		Map<String, ServerDef> result = new HashMap<String, ServerDef>();
 
 		try {
 			//Get Document Builder
@@ -35,7 +35,7 @@ public class ConfigurationImpl implements Configuration {
 			document.getDocumentElement().normalize();
 
 			//Here comes the root node
-			Element root = document.getDocumentElement();
+			//Element root = document.getDocumentElement();
 
 			//Get all servers
 			NodeList nList = document.getElementsByTagName("server");
@@ -48,11 +48,15 @@ public class ConfigurationImpl implements Configuration {
 					String id = eElement.getAttribute("id");
 					String description = eElement.getElementsByTagName("description").item(0).getTextContent();
 					String address = eElement.getElementsByTagName("address").item(0).getTextContent();
+					String SSHPort = eElement.getElementsByTagName("SSHPort").item(0).getTextContent();
 					String username = eElement.getElementsByTagName("username").item(0).getTextContent();
 					String password = eElement.getElementsByTagName("password").item(0).getTextContent();
 					String startScript = eElement.getElementsByTagName("startScript").item(0).getTextContent();
 					String stopScript = eElement.getElementsByTagName("stopScript").item(0).getTextContent();
-					ServerConfig newServer = new ServerConfigImpl(id, description, address, username, password, startScript, stopScript);
+					ServerDef newServer = new ServerDefImpl(id, description,
+															address, Integer.valueOf(SSHPort),
+															username, password,
+															startScript, stopScript);
 					result.put(id,  newServer);
 				}
 			}
@@ -61,10 +65,6 @@ public class ConfigurationImpl implements Configuration {
 			e.printStackTrace();
 		}
 		return result;
-	}
-
-	private String getPythonPath() {
-		return System.getProperty("com.hpe.commander.python", "commander-config.xml");
 	}
 
 	private String getConfigFilePath() {

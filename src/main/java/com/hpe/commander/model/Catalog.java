@@ -7,12 +7,12 @@ public interface Catalog {
 	/**
 	 * @return whole servers catalog
 	 */
-	public abstract List<ServerConfig> getAll();
+	public abstract List<ServerDef> getAll();
 
 	/**
 	 * @return a server with a given ID
 	 */
-	public abstract ServerConfig getByID(String id);
+	public abstract ServerDef getByID(String id);
 
 	/**
 	 * Reload the servers catalog from file

@@ -6,23 +6,23 @@ import java.util.List;
 import java.util.Map;
 
 import com.hpe.commander.model.Catalog;
-import com.hpe.commander.model.ServerConfig;
+import com.hpe.commander.model.ServerDef;
 import com.hpe.commander.util.Configuration;
 
 public class CatalogImpl implements Catalog {
 
     @Override
-    public List<ServerConfig> getAll() {
+    public List<ServerDef> getAll() {
         synchronized (allServers) {
             if (allServers.isEmpty()) {
             	reload();
             }
-            return new ArrayList<ServerConfig>(allServers.values());
+            return new ArrayList<ServerDef>(allServers.values());
         }
     }
 
     @Override
-    public ServerConfig getByID(String id) {
+    public ServerDef getByID(String id) {
         if (id == null) {
             throw new IllegalArgumentException("id can not be null");
         }
@@ -30,7 +30,7 @@ public class CatalogImpl implements Catalog {
             if (allServers.isEmpty()) {
             	reload();
             }
-            for (ServerConfig server : allServers.values()) {
+            for (ServerDef server : allServers.values()) {
                 if (id.equals(server.getId())) {
                     return server;
                 }
@@ -50,7 +50,7 @@ public class CatalogImpl implements Catalog {
 		this.configuration = configuration;
 	}
 
-    private Map<String, ServerConfig> allServers =  new HashMap<String, ServerConfig> ();
+    private Map<String, ServerDef> allServers =  new HashMap<String, ServerDef> ();
     private Configuration configuration;
 
 }

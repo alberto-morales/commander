@@ -1,15 +1,17 @@
 <servers>
     <server id="server-1">
-        <description>descripcion-1</description>
-        <address>address-1</address>
-        <username>username-1</username>
-        <password>password-1</password>
-        <startScript>start-1</startScript>
-        <stopScript>stop-1</stopScript>
+        <description>UBUNTU VirtualBox local</description>
+        <address>192.168.1.134</address>
+        <SSHPort>22</SSHPort>
+        <username>tucho</username>
+        <password>tuputamadre</password>
+        <startScript>pwd</startScript>
+        <stopScript>stop</stopScript>
     </server>
     <server id="server-2">
         <description>descripcion-2</description>
         <address>address-2</address>
+        <SSHPort>22</SSHPort>
         <username>username-2</username>
         <password>password-2</password>
         <startScript>start-2</startScript>

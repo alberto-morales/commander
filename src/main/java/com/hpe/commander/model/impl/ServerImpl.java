@@ -1,27 +1,30 @@
 package com.hpe.commander.model.impl;
 
+import com.hpe.commander.model.CommandRunner;
 import com.hpe.commander.model.Server;
-import com.hpe.commander.model.ServerConfig;
+import com.hpe.commander.model.ServerDef;
 
 public class ServerImpl implements Server {
 
-	public ServerImpl(ServerConfig serverConfiguration) {
+	public ServerImpl(ServerDef serverConfiguration) {
 		super();
 		this.serverConfiguration = serverConfiguration;
 	}
 
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
-		System.out.println("Starting "+serverConfiguration.getId());
+		commandRunner.run(serverConfiguration.getStartScript(),
+						  serverConfiguration.getHostConfig());
 	}
 
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
-		System.out.println("Stoping "+serverConfiguration.getId());
+		commandRunner.run(serverConfiguration.getStopScript(),
+						  serverConfiguration.getHostConfig());
 	}
 
-	private ServerConfig serverConfiguration;
+	private ServerDef serverConfiguration;
+	private CommandRunner commandRunner = new CommandRunnerImpl();
 
 }
