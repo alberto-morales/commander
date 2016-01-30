@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\cURL\CURL.EXE" --verbose http://localhost:8180/commander/services/servers/server-1/start
