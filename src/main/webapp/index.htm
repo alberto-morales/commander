@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>Welcome</title>
+<script src="includes/js/jquery-1.12.0.js"></script>
+<script>
+	alert("estamos en marcha");
+	$.getJSON( "rest/servers", function( data ) {
+		  var items = [];
+		  $.each( data, function( idx, server ) {
+		    items.push( "<li id='" + key + "'>" + val + "</li>" );
+		    alert(server.id);
+		  });
+
+		  /*
+		  $( "<ul/>", {
+		    "class": "my-new-list",
+		    html: items.join( "" )
+		  }).appendTo( "body" );
+		  */
+		});
+</script>
+</head>
+<body>
+COMMANDER WEB module started
+<div><div>server-1</div><div><a href="rest/servers/server-1/start">Start</a></div><div><a href="rest/servers/server-1/stop">Stop</a></div></div>
+</body>
+</html>

@@ -6,7 +6,7 @@
     					http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
-  <jaxrs:server id="serverservice" address="/services">
+  <jaxrs:server id="serverservice" address="/">
 	    <jaxrs:serviceBeans>
 	      <ref bean="serverServiceImpl" />
 	    </jaxrs:serviceBeans>
