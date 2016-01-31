@@ -5,6 +5,20 @@
 		<meta charset="utf-8" />
 
 		<link rel="stylesheet" href="includes/css/main.css" />
+		<style>
+		.start-server  {
+    		background-image: url(images/start.png);
+    		display: inline-block;
+    		width: 16px;
+    		height: 16px;
+    	}
+		.stop-server  {
+    		background-image: url(images/stop.png);
+    		display: inline-block;
+    		width: 16px;
+    		height: 16px;
+    	}
+		</style>
 	</head>
 	<body>
 
@@ -44,17 +58,9 @@
 
 						<!-- Two -->
 							<section id="two">
-								<div class="container">
+								<div id="servers-div" class="container">
 									<h3>Things I can do</h3>
 									<p>Choose any server instance from the list below, and click on the start link (if you're insterested in to start it) or the stop link (if you're interested in to stop it).</p>
-									<ul class="feature-icons">
-										<li class="">Write all the code</li>
-										<li class="">Stack small boxes</li>
-										<li class="">Read books and stuff</li>
-										<li class="">Drink much coffee</li>
-										<li class="">Lightning bolt</li>
-										<li class="">Shadow clone technique</li>
-									</ul>
 								</div>
 							</section>
 
@@ -105,7 +111,6 @@
 									</p>
 									</div>
 									</article>
-									</form>
 								</div>
 							</section>
 
@@ -130,6 +135,21 @@
 			<script src="includes/js/util.js"></script>
 			<!--[if lte IE 8]><script src="includes/javascript/ie/respond.min.js"></script><![endif]-->
 			<script src="includes/js/main.js"></script>
+
+			<script>
+				$.getJSON( "rest/servers", function( data ) {
+					var items = [];
+					$( document ).ready(function() {
+						  $("<ul id='servers-ul' class='feature-icons' />").appendTo("#servers-div");
+						  $.each( data, function( idx, server ) {
+							    items.push("<li id='idx_" + idx + "' class='li-server'>" + server.description + "&nbsp;&nbsp;<a href='rest/servers/" + server.id + "/start' target='_blank' class='start-server'></a>&nbsp;&nbsp;<a href='rest/servers/" + server.id + "/stop' target='_blank' class='stop-server'></a></li>" );
+							  });
+						  $("#servers-ul").append(items);
+					});
+
+
+				});
+			</script>
 
 	</body>
 </html>
