@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Commander</title>
+		<meta charset="utf-8" />
+
+		<link rel="stylesheet" href="includes/css/main.css" />
+		<style>
+		.start-server  {
+    		background-image: url(images/start.png);
+    		display: inline-block;
+    		width: 16px;
+    		height: 16px;
+    	}
+		.stop-server  {
+    		background-image: url(images/stop.png);
+    		display: inline-block;
+    		width: 16px;
+    		height: 16px;
+    	}
+		</style>
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">Server commander</a></h1>
+					<p>A place to rule them all</p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#two">Things I can do</a></li>
+						<li><a href="#three">A brief overview</a></li>
+						<li><a href="#four">Configuration</a></li>
+					</ul>
+				</nav>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>About</h2>
+										<p>Just an incredibly simple way to start/stop any server instance, from the same place.</p>
+									</header>
+									<p>Our team is responsible for deploying onto, starting and and stopping test servers. Sometimes the servers don't respond and you need to restart them. You can contact us or, with the help of  "COMMANDER", do it by yourself.</p>
+								</div>
+							</section>
+
+						<!-- Two -->
+							<section id="two">
+								<div id="servers-div" class="container">
+									<h3>Things I can do</h3>
+									<p>Choose any server instance from the list below, and click on the start link (if you're insterested in to start it) or the stop link (if you're interested in to stop it).</p>
+								</div>
+							</section>
+
+						<!-- Three -->
+							<section id="three">
+								<div class="container">
+									<h3>A brief overview</h3>
+									<p>"COMMANDER" is a simple web module that offers you a REST API to manage (for the moment, start & stop) a previously defined set of server instances. This API defines a set of functions which users can: </p>
+									<div class="features">
+										<article>
+											<a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>Query to get the list of defined server instances</h4>
+												<p>http://[host]:[port]/commander/rest/servers</p>
+											</div>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>Start a server</h4>
+												<p>http://[host]:[port]/commander/rest/servers/[server_id]/start</p>
+											</div>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>Stop a server</h4>
+												<p>http://[host]:[port]/commander/rest/servers/[server_id]/stop</p>
+											</div>
+										</article>
+									</div>
+									<p>Aditionally "COMMANDER" has home page, the one that you are seeing at the moment, to access them all. It is only a matter of time before new functions arise, or new clients (python, android, iOS, etc...) be created.</p>
+								</div>
+							</section>
+
+						<!-- Four -->
+							<section id="four">
+								<div class="container">
+									<h3>Configuration</h3>
+									<p>In order to use "COMANDER", the servers definition file path must be referenced as a JVM system property:</p>
+									<article>
+									<div>
+									<p>
+										-Dcom.hpe.commander.config-file=[file-path]/commander-config.xml
+									</p>
+									<p>
+										You can find an example of this file <a href="file:example.xml" title="Servers definition file sample" download >here</a>.
+									</p>
+									</div>
+									</article>
+								</div>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>The <a href="https://github.com/alberto-morales/commander.git">COMMANDER source code</a> is published under version 2.1 of the GNU Lesser General Public License (LGPL)</li><li>COMMANDER is Copyright 2016 <a href="http://albertomorales.eu">Alberto Morales Morales</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="includes/js/jquery-1.12.0.min.js"></script>
+			<script src="includes/js/jquery.scrollzer.min.js"></script>
+			<script src="includes/js/jquery.scrolly.min.js"></script>
+			<script src="includes/js/skel.min.js"></script>
+			<script src="includes/js/util.js"></script>
+			<!--[if lte IE 8]><script src="includes/javascript/ie/respond.min.js"></script><![endif]-->
+			<script src="includes/js/main.js"></script>
+
+			<script>
+				$.getJSON( "rest/servers", function( data ) {
+					var items = [];
+					$( document ).ready(function() {
+						  $("<ul id='servers-ul' class='feature-icons' />").appendTo("#servers-div");
+						  $.each( data, function( idx, server ) {
+							    items.push("<li id='idx_" + idx + "' class='li-server'>" + server.description + "&nbsp;&nbsp;<a href='rest/servers/" + server.id + "/start' target='_blank' class='start-server'></a>&nbsp;&nbsp;<a href='rest/servers/" + server.id + "/stop' target='_blank' class='stop-server'></a></li>" );
+							  });
+						  $("#servers-ul").append(items);
+					});
+
+
+				});
+			</script>
+
+	</body>
+</html>
