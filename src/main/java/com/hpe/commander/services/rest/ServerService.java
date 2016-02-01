@@ -30,27 +30,25 @@ public class ServerService {
 
     @GET
     @Path("/servers/{serverId}/start")
-    @Produces("application/json")
+    @Produces("text/plain")
     @Consumes("application/json")
-    public ServerVO startServer(@PathParam("serverId") String serverId) {
+    public String startServer(@PathParam("serverId") String serverId) {
     	ServerDef serverConfig = getServerConfig(serverId);
     	if (serverConfig == null) return null;
     	Server server = new ServerImpl(serverConfig);
-    	server.start();
-    	ServerVO result = builder.build(serverConfig);
+    	String result = server.start();
 		return result;
     }
 
     @GET
     @Path("/servers/{serverId}/stop")
-    @Produces("application/json")
+    @Produces("text/plain")
     @Consumes("application/json")
-    public ServerVO stopServer(@PathParam("serverId") String serverId) {
+    public String stopServer(@PathParam("serverId") String serverId) {
     	ServerDef serverConfig = getServerConfig(serverId);
     	if (serverConfig == null) return null;
     	Server server = new ServerImpl(serverConfig);
-    	server.stop();
-    	ServerVO result = builder.build(serverConfig);
+    	String result = server.stop();
 		return result;
     }
 

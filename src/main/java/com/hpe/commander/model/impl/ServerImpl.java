@@ -12,16 +12,16 @@ public class ServerImpl implements Server {
 	}
 
 	@Override
-	public void start() {
-		commandRunner.run(serverConfiguration.getStartScript(),
-						  serverConfiguration.getHostConfig());
+	public String start() {
+		return commandRunner.run(serverConfiguration.getStartScript(),
+						  		 serverConfiguration.getHostConfig());
 	}
 
 	@Override
-	public void stop() {
+	public String stop() {
 		// TODO Auto-generated method stub
-		commandRunner.run(serverConfiguration.getStopScript(),
-						  serverConfiguration.getHostConfig());
+		return commandRunner.run(serverConfiguration.getStopScript(),
+						  		 serverConfiguration.getHostConfig());
 	}
 
 	private ServerDef serverConfiguration;

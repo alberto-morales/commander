@@ -4,11 +4,13 @@ public interface Server {
 
 	/**
 	 * Starts the server
+	 * @return resultado de la operacion	 *
 	 */
-	public void start();
+	public String start();
 
 	/**
 	 * Stops the server
+	 * @return resultado de la operacion
 	 */
-	public void stop();
+	public String stop();
 }
