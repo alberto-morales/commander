@@ -18,6 +18,15 @@ import com.hpe.commander.services.builder.impl.ServerBuilder;
 public class ServerService {
 
     @GET
+    @Path("/servers/reload")
+    @Produces("text/plain")
+    @Consumes("application/json")
+    public String reloadServers() {
+    	catalog.reload();
+		return "Servers definition file reloaded";
+    }
+
+    @GET
     @Path("/servers/{serverId}/")
     @Produces("application/json")
     @Consumes("application/json")
