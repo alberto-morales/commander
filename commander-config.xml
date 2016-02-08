@@ -1,20 +1,35 @@
-<servers>
-    <server id="server-1">
-        <description>UBUNTU VirtualBox local</description>
-        <address>192.168.56.101</address>
-        <SSHPort>22</SSHPort>
-        <username>tucho</username>
-        <password>tuputamadre</password>
-        <startScript>pwd</startScript>
-        <stopScript>stop</stopScript>
-    </server>
-    <server id="server-2">
-        <description>descripcion-2</description>
-        <address>address-2</address>
-        <SSHPort>22</SSHPort>
-        <username>username-2</username>
-        <password>password-2</password>
-        <startScript>start-2</startScript>
-        <stopScript>stop-2</stopScript>
-    </server>
-</servers>
+<commander-config>
+    <servers>
+        <server id="server-1">
+            <description>UBUNTU VirtualBox local</description>
+            <address>192.168.56.101</address>
+            <SSHPort>22</SSHPort>
+            <username>tucho</username>
+            <password>tuputamadre</password>
+            <startScript>pwd</startScript>
+            <stopScript>stop</stopScript>
+        </server>
+        <server id="server-2">
+            <description>server-2</description>
+            <address>address-2</address>
+            <SSHPort>22</SSHPort>
+            <username>username-2</username>
+            <password>password-2</password>
+            <startScript>start-2</startScript>
+            <stopScript>stop-2</stopScript>
+        </server>
+    </servers>
+    <environments>
+        <environment id="env-1">
+            <description>environment-1</description>            
+            <server-ref>
+                <id>server-1</id>
+                <order>1</order>
+            </server-ref>
+            <server-ref>
+                <id>server-2</id>
+                <order>1</order>
+            </server-ref>
+        </environment>
+    </environments>
+</commander-config>

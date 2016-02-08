@@ -25,11 +25,14 @@
 
     <bean id="serverBuilder" class="com.hpe.commander.services.builder.impl.ServerBuilder" />
 
+    <bean id="environmentBuilder" class="com.hpe.commander.services.builder.impl.EnvironmentBuilder" />
+
     <bean id="configurationUtil" class="com.hpe.commander.util.impl.ConfigurationImpl" />
 
     <bean id="serverServiceImpl" class="com.hpe.commander.services.rest.ServerService">
         <property name="catalog" ref="catalog" />
-    	<property name="builder" ref="serverBuilder" />
+    	<property name="serverBuilder" ref="serverBuilder" />
+    	<property name="environmentBuilder" ref="environmentBuilder" />
     </bean>
 
 </beans>

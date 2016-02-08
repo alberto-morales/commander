@@ -12,12 +12,17 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.hpe.commander.model.EnvironmentDef;
 import com.hpe.commander.model.ServerDef;
+import com.hpe.commander.model.impl.EnvironmentDefImpl;
 import com.hpe.commander.model.impl.ServerDefImpl;
 import com.hpe.commander.util.Configuration;
 
 public class ConfigurationImpl implements Configuration {
 
+	/* (non-Javadoc)
+	 * @see com.hpe.commander.util.Configuration#getServerDefinitions()
+	 */
 	@Override
 	public Map<String, ServerDef> getServerDefinitions() {
 		Map<String, ServerDef> result = new HashMap<String, ServerDef>();
@@ -58,6 +63,49 @@ public class ConfigurationImpl implements Configuration {
 															username, password,
 															startScript, stopScript);
 					result.put(id,  newServer);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.hpe.commander.util.Configuration#getEnvironmentDefinitions()
+	 */
+	@Override
+	public Map<String, EnvironmentDef> getEnvironmentDefinitions() {
+		Map<String, EnvironmentDef> result = new HashMap<String, EnvironmentDef>();
+
+		try {
+			//Get Document Builder
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+
+			//Build Document
+			String configFilePath = getConfigFilePath();
+			Document document = builder.parse(new File(configFilePath));
+
+			//Normalize the XML Structure; It's just too important !!
+			document.getDocumentElement().normalize();
+
+			//Here comes the root node
+			//Element root = document.getDocumentElement();
+
+			//Get all servers
+			NodeList nList = document.getElementsByTagName("environment");
+
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+				Node node = nList.item(temp);
+				if (node.getNodeType() == Node.ELEMENT_NODE) {
+				    //Print each server's detail
+					Element eElement = (Element) node;
+					String id = eElement.getAttribute("id");
+					String description = eElement.getElementsByTagName("description").item(0).getTextContent();
+					EnvironmentDef newEnvironment = new EnvironmentDefImpl(id, description);
+					result.put(id,  newEnvironment);
 				}
 			}
 

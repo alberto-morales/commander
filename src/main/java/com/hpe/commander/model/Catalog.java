@@ -7,19 +7,25 @@ public interface Catalog {
 	/**
 	 * @return whole servers catalog
 	 */
-	public abstract List<ServerDef> getAll();
+	public abstract List<ServerDef> getServers();
 
 	/**
 	 * @return a server with a given ID
 	 */
-	public abstract ServerDef getByID(String id);
+	public abstract ServerDef getServerByID(String id);
 
 	/**
-	 * Reload the servers catalog from file
-	 *
-	 * @param title
-	 * @param iSBN
-	 * @return the added book
+	 * @return whole environments catalog
+	 */
+	public abstract List<EnvironmentDef> getEnvironments();
+
+	/**
+	 * @return a environment with a given ID
+	 */
+	public abstract EnvironmentDef getEnvironmentByID(String id);
+
+	/**
+	 * Reload the servers and environments catalog from file
 	 */
 	public abstract void reload();
 
