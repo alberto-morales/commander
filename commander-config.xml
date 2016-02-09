@@ -24,11 +24,9 @@
             <description>environment-1</description>            
             <server-ref>
                 <id>server-1</id>
-                <order>1</order>
             </server-ref>
             <server-ref>
                 <id>server-2</id>
-                <order>1</order>
             </server-ref>
         </environment>
     </environments>

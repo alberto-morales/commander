@@ -15,8 +15,15 @@ public interface EnvironmentDef {
 	public abstract String getDescription();
 
 	/**
-	 * @return list of servers the environment is made up of
+	 * @return list of server-IDs the environment is made up of
 	 */
-	public abstract List<ServerDef> getServerList();
+	public abstract List<String> getServerList();
+
+	/**
+	 * add a server-ID to the Environment's server list
+	 *
+	 * @param serverId server ID to be added
+	 */
+	public abstract void addServer(String serverId);
 
 }

@@ -1,6 +1,8 @@
 package com.hpe.commander.services.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -35,8 +37,19 @@ public class EnvironmentVO implements Serializable {
 		this.id = id;
 	}
 
+	@XmlElement(name="servers")
+	public List<String> getServers() {
+		return servers;
+	}
+
+	public void setServers(List<String> servers) {
+		this.servers = servers;
+	}
+
 	private String id;
 	private String description;
+	private List<String> servers = new ArrayList<String>();
+
 	private static final long serialVersionUID = 1L;
 
 }

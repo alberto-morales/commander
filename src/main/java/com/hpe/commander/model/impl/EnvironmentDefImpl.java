@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hpe.commander.model.EnvironmentDef;
-import com.hpe.commander.model.ServerDef;
 
 public class EnvironmentDefImpl implements EnvironmentDef {
 
@@ -19,25 +18,24 @@ public class EnvironmentDefImpl implements EnvironmentDef {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	@Override
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	@Override
+	public List<String> getServerList() {
+		return serverList;
 	}
 
 	@Override
-	public List<ServerDef> getServerList() {
-		return new ArrayList<ServerDef>();
+	public void addServer(String serverId) {
+		serverList.add(serverId);
 	}
 
 	private String id;
 	private String description;
+	private List<String> serverList = new ArrayList<String>();
+
 
 }

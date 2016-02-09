@@ -13,6 +13,7 @@ public class EnvironmentBuilder extends AbstractBuilder<EnvironmentDef, Environm
 		EnvironmentVO result
 				= new EnvironmentVO(environment.getId(),
 									environment.getDescription());
+		result.setServers(environment.getServerList());
 		return result;
 	}
 

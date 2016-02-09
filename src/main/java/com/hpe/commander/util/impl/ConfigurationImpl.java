@@ -45,10 +45,10 @@ public class ConfigurationImpl implements Configuration {
 			//Get all servers
 			NodeList nList = document.getElementsByTagName("server");
 
-			for (int temp = 0; temp < nList.getLength(); temp++) {
-				Node node = nList.item(temp);
+			for (int i = 0; i < nList.getLength(); i++) {
+				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
-				    //Print each server's detail
+				    //Deal with each server's detail
 					Element eElement = (Element) node;
 					String id = eElement.getAttribute("id");
 					String description = eElement.getElementsByTagName("description").item(0).getTextContent();
@@ -97,14 +97,23 @@ public class ConfigurationImpl implements Configuration {
 			//Get all servers
 			NodeList nList = document.getElementsByTagName("environment");
 
-			for (int temp = 0; temp < nList.getLength(); temp++) {
-				Node node = nList.item(temp);
+			for (int i = 0; i < nList.getLength(); i++) {
+				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
-				    //Print each server's detail
+				    //Deal with each environment's detail
 					Element eElement = (Element) node;
 					String id = eElement.getAttribute("id");
 					String description = eElement.getElementsByTagName("description").item(0).getTextContent();
 					EnvironmentDef newEnvironment = new EnvironmentDefImpl(id, description);
+					NodeList children = eElement.getElementsByTagName("server-ref");
+					for (int j = 0; j < children.getLength(); j++) {
+						Node child = children.item(j);
+						if (child.getNodeType() == Node.ELEMENT_NODE) {
+							Element eChild = (Element) child;
+							String idServer = eChild.getElementsByTagName("id").item(0).getTextContent();
+							newEnvironment.addServer(idServer);
+						}
+					}
 					result.put(id,  newEnvironment);
 				}
 			}
