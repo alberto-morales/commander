@@ -1,22 +1,22 @@
 <commander-config>
     <servers>
         <server id="server-1">
-            <description>UBUNTU VirtualBox local</description>
+            <description>UBUNTU VirtualBox local 1</description>
             <address>192.168.56.101</address>
             <SSHPort>22</SSHPort>
             <username>tucho</username>
             <password>tuputamadre</password>
-            <startScript>pwd</startScript>
-            <stopScript>stop</stopScript>
+            <startScript>/home/tucho/startScript1.sh</startScript>
+            <stopScript>/home/tucho/stopScript1.sh</stopScript>
         </server>
         <server id="server-2">
-            <description>server-2</description>
-            <address>address-2</address>
+            <description>UBUNTU VirtualBox local 2</description>
+            <address>192.168.56.101</address>
             <SSHPort>22</SSHPort>
-            <username>username-2</username>
-            <password>password-2</password>
-            <startScript>start-2</startScript>
-            <stopScript>stop-2</stopScript>
+            <username>tucho</username>
+            <password>tuputamadre</password>
+            <startScript>/home/tucho/startScript2.sh</startScript>
+            <stopScript>/home/tucho/stopScript2.sh</stopScript>
         </server>
     </servers>
     <environments>

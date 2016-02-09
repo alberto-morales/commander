@@ -1,16 +1,10 @@
 package com.hpe.commander.model;
 
-public interface Server {
+public interface Server extends Startable {
 
 	/**
-	 * Starts the server
-	 * @return resultado de la operacion	 *
+	 * @return server Description
 	 */
-	public String start();
+	public abstract String getDescription();
 
-	/**
-	 * Stops the server
-	 * @return resultado de la operacion
-	 */
-	public String stop();
 }

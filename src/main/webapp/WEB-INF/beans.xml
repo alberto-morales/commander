@@ -23,6 +23,10 @@
         <property name="configuration" ref="configurationUtil" />
     </bean>
 
+    <bean id="startableFactory" class="com.hpe.commander.model.impl.StartableFactoryImpl" >
+        <property name="catalog" ref="catalog" />
+    </bean>
+
     <bean id="serverBuilder" class="com.hpe.commander.services.builder.impl.ServerBuilder" />
 
     <bean id="environmentBuilder" class="com.hpe.commander.services.builder.impl.EnvironmentBuilder" />
@@ -33,6 +37,7 @@
         <property name="catalog" ref="catalog" />
     	<property name="serverBuilder" ref="serverBuilder" />
     	<property name="environmentBuilder" ref="environmentBuilder" />
+    	<property name="startableFactory" ref="startableFactory" />
     </bean>
 
 </beans>

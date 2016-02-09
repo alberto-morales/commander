@@ -5,24 +5,24 @@ import java.util.List;
 public interface Catalog {
 
 	/**
-	 * @return whole servers catalog
+	 * @return whole server definitions catalog
 	 */
-	public abstract List<ServerDef> getServers();
+	public abstract List<ServerDef> getServerDefs();
 
 	/**
-	 * @return a server with a given ID
+	 * @return a server definition with a given ID
 	 */
-	public abstract ServerDef getServerByID(String id);
+	public abstract ServerDef getServerDefByID(String id);
 
 	/**
-	 * @return whole environments catalog
+	 * @return whole environment definitions catalog
 	 */
-	public abstract List<EnvironmentDef> getEnvironments();
+	public abstract List<EnvironmentDef> getEnvironmentDefs();
 
 	/**
-	 * @return a environment with a given ID
+	 * @return a environment definition with a given ID
 	 */
-	public abstract EnvironmentDef getEnvironmentByID(String id);
+	public abstract EnvironmentDef getEnvironmentDefByID(String id);
 
 	/**
 	 * Reload the servers and environments catalog from file

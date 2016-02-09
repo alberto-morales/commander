@@ -11,10 +11,10 @@ import javax.ws.rs.Produces;
 import com.hpe.commander.services.vo.EnvironmentVO;
 import com.hpe.commander.services.vo.ServerVO;
 import com.hpe.commander.model.EnvironmentDef;
-import com.hpe.commander.model.Server;
 import com.hpe.commander.model.ServerDef;
 import com.hpe.commander.model.Catalog;
-import com.hpe.commander.model.impl.ServerImpl;
+import com.hpe.commander.model.Startable;
+import com.hpe.commander.model.impl.StartableFactory;
 import com.hpe.commander.services.builder.impl.EnvironmentBuilder;
 import com.hpe.commander.services.builder.impl.ServerBuilder;
 
@@ -33,7 +33,7 @@ public class ServerService {
     @Path("/servers")
     @Produces("application/json")
     public List<ServerVO> getServers() {
-    	List<ServerDef> serverConfigList = catalog.getServers();
+    	List<ServerDef> serverConfigList = catalog.getServerDefs();
     	List<ServerVO> result = serverBuilder.build(serverConfigList);
 		return result;
 	}
@@ -54,9 +54,8 @@ public class ServerService {
     @Produces("text/plain")
     @Consumes("application/json")
     public String startServer(@PathParam("serverId") String serverId) {
-    	ServerDef serverConfig = getServerDefinition(serverId);
-    	if (serverConfig == null) return null;
-    	Server server = new ServerImpl(serverConfig);
+    	ServerDef serverDef = getServerDefinition(serverId);
+    	Startable server = startableFactory.createStartable(serverDef);
     	String result = server.start();
 		return result;
     }
@@ -66,12 +65,20 @@ public class ServerService {
     @Produces("text/plain")
     @Consumes("application/json")
     public String stopServer(@PathParam("serverId") String serverId) {
-    	ServerDef serverConfig = getServerDefinition(serverId);
-    	if (serverConfig == null) return null;
-    	Server server = new ServerImpl(serverConfig);
+    	ServerDef serverDef = getServerDefinition(serverId);
+    	Startable server = startableFactory.createStartable(serverDef);
     	String result = server.stop();
 		return result;
     }
+
+    @GET
+    @Path("/environments")
+    @Produces("application/json")
+    public List<EnvironmentVO> getEnvironments() {
+    	List<EnvironmentDef> environmentConfigList = catalog.getEnvironmentDefs();
+    	List<EnvironmentVO> result = environmentBuilder.build(environmentConfigList);
+		return result;
+	}
 
     @GET
     @Path("/environments/{environmentId}/")
@@ -85,13 +92,26 @@ public class ServerService {
     }
 
     @GET
-    @Path("/environments")
-    @Produces("application/json")
-    public List<EnvironmentVO> getEnvironments() {
-    	List<EnvironmentDef> environmentConfigList = catalog.getEnvironments();
-    	List<EnvironmentVO> result = environmentBuilder.build(environmentConfigList);
+    @Path("/environments/{environmentId}/start")
+    @Produces("text/plain")
+    @Consumes("application/json")
+    public String startEnvironment(@PathParam("environmentId") String environmentId) {
+    	EnvironmentDef environmentDef = getEnvironmentDefinition(environmentId);
+    	Startable environment = startableFactory.createStartable(environmentDef);
+    	String result = environment.start();
 		return result;
-	}
+    }
+
+    @GET
+    @Path("/environments/{environmentId}/stop")
+    @Produces("text/plain")
+    @Consumes("application/json")
+    public String stopEnvironment(@PathParam("environmentId") String environmentId) {
+    	EnvironmentDef environmentDef = getEnvironmentDefinition(environmentId);
+    	Startable environment = startableFactory.createStartable(environmentDef);
+    	String result = environment.stop();
+		return result;
+    }
 
     public void setCatalog(Catalog catalog) {
 		this.catalog = catalog;
@@ -102,21 +122,25 @@ public class ServerService {
 	public void setEnvironmentBuilder(EnvironmentBuilder environmentBuilder) {
 		this.environmentBuilder = environmentBuilder;
 	}
+	public void setStartableFactory(StartableFactory startableFactory) {
+		this.startableFactory = startableFactory;
+	}
 
 	private ServerDef getServerDefinition(String serverId) {
 		if (serverId == null) return null;
-    	ServerDef serverDefinition = catalog.getServerByID(serverId);
+    	ServerDef serverDefinition = catalog.getServerDefByID(serverId);
 		return serverDefinition;
 	}
 
 	private EnvironmentDef getEnvironmentDefinition(String environmentId) {
 		if (environmentId == null) return null;
-    	EnvironmentDef environmentDefinition = catalog.getEnvironmentByID(environmentId);
+    	EnvironmentDef environmentDefinition = catalog.getEnvironmentDefByID(environmentId);
 		return environmentDefinition;
 	}
 
     private Catalog catalog;
 	private ServerBuilder serverBuilder;
 	private EnvironmentBuilder environmentBuilder;
+	private StartableFactory startableFactory;
 
 }

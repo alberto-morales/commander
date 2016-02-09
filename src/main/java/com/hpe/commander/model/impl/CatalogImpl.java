@@ -13,10 +13,10 @@ import com.hpe.commander.util.Configuration;
 public class CatalogImpl implements Catalog {
 
     /* (non-Javadoc)
-     * @see com.hpe.commander.model.Catalog#getServers()
+     * @see com.hpe.commander.model.Catalog#getServerDefs()
      */
     @Override
-    public List<ServerDef> getServers() {
+    public List<ServerDef> getServerDefs() {
         synchronized (configuration) {
             if (allServers.isEmpty()) {
             	reload();
@@ -25,11 +25,12 @@ public class CatalogImpl implements Catalog {
         }
     }
 
+
     /* (non-Javadoc)
-     * @see com.hpe.commander.model.Catalog#getServerByID(java.lang.String)
+     * @see com.hpe.commander.model.Catalog#getServerDefByID(java.lang.String)
      */
     @Override
-    public ServerDef getServerByID(String id) {
+    public ServerDef getServerDefByID(String id) {
         if (id == null) {
             throw new IllegalArgumentException("id can not be null");
         }
@@ -41,11 +42,12 @@ public class CatalogImpl implements Catalog {
         }
     }
 
+
 	/* (non-Javadoc)
-	 * @see com.hpe.commander.model.Catalog#getEnvironments()
+	 * @see com.hpe.commander.model.Catalog#getEnvironmentDefs()
 	 */
 	@Override
-	public List<EnvironmentDef> getEnvironments() {
+	public List<EnvironmentDef> getEnvironmentDefs() {
         synchronized (configuration) {
             if (allServers.isEmpty()) {
             	reload();
@@ -55,10 +57,10 @@ public class CatalogImpl implements Catalog {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.hpe.commander.model.Catalog#getEnvironmentByID(java.lang.String)
+	 * @see com.hpe.commander.model.Catalog#getEnvironmentDefByID(java.lang.String)
 	 */
 	@Override
-	public EnvironmentDef getEnvironmentByID(String id) {
+	public EnvironmentDef getEnvironmentDefByID(String id) {
         if (id == null) {
             throw new IllegalArgumentException("id can not be null");
         }

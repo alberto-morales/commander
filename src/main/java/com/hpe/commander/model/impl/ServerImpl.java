@@ -24,6 +24,11 @@ public class ServerImpl implements Server {
 						  		 serverConfiguration.getHostConfig());
 	}
 
+	@Override
+	public String getDescription() {
+		return serverConfiguration == null ? "" : serverConfiguration.getDescription();
+	}
+
 	private ServerDef serverConfiguration;
 	private CommandRunner commandRunner = new CommandRunnerImpl();
 
