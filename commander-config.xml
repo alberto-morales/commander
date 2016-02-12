@@ -5,7 +5,7 @@
             <address>192.168.56.101</address>
             <SSHPort>22</SSHPort>
             <username>tucho</username>
-            <password>tuputamadre</password>
+            <password>xnnNJIuG1JXc8rF00x3Anw==</password>
             <startScript>/home/tucho/startScript1.sh</startScript>
             <stopScript>/home/tucho/stopScript1.sh</stopScript>
         </server>
@@ -14,7 +14,7 @@
             <address>192.168.56.101</address>
             <SSHPort>22</SSHPort>
             <username>tucho</username>
-            <password>tuputamadre</password>
+            <password>xnnNJIuG1JXc8rF00x3Anw==</password>
             <startScript>/home/tucho/startScript2.sh</startScript>
             <stopScript>/home/tucho/stopScript2.sh</stopScript>
         </server>

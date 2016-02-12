@@ -23,9 +23,9 @@ public class EncDecrypterImpl implements EncDecrypter {
 	        Key key = generateKey();
 	        Cipher c = Cipher.getInstance(algorithm);
 	        c.init(Cipher.DECRYPT_MODE, key);
-	        byte[] decordedValue = new BASE64Decoder().decodeBuffer(source);
-	        byte[] decValue = c.doFinal(decordedValue);
-	        decryptedValue = new String(decValue);
+	        byte[] decodedValue = new BASE64Decoder().decodeBuffer(source);
+	        byte[] decryptedData = c.doFinal(decodedValue);
+	        decryptedValue = new String(decryptedData);
 		} catch (Exception e) {
 			log.error("Error decrypting data", e);
 			throw new RuntimeException(e);
@@ -38,18 +38,18 @@ public class EncDecrypterImpl implements EncDecrypter {
 	 */
 	@Override
 	public String  encrypt(String source) {
-		String encryptedValue = null;
+		String encodedValue = null;
 		try {
 	        Key key = generateKey();
 	        Cipher c = Cipher.getInstance(algorithm);
 	        c.init(Cipher.ENCRYPT_MODE, key);
-	        byte[] encVal = c.doFinal(source.getBytes());
-	        encryptedValue = new BASE64Encoder().encode(encVal);
+	        byte[] encryptedData = c.doFinal(source.getBytes());
+	        encodedValue = new BASE64Encoder().encode(encryptedData);
 		} catch (Exception e) {
 			log.error("Error encrypting data", e);
 			throw new RuntimeException(e);
 		}
-        return encryptedValue;
+        return encodedValue;
 	}
 
     private static Key generateKey() throws Exception {
@@ -63,7 +63,9 @@ public class EncDecrypterImpl implements EncDecrypter {
         return key;
     }
 
-	private static final byte[] keyValue =  new byte[] { 'F', 'I', 'F', 'T', 'Y', 'F', 'U',	'C', 'K', 'I', 'N','G', 'T', 'I', 'M', 'E', 'S' };
+	private static final byte[] keyValue =  new byte[] { 'F', 'o', 'u', 'r',
+														 'F', 'u',	'c', 'k', 'i', 'n','g',
+														 'T', 'i', 'm', 'e', 's' };
 	private static final String algorithm = "AES" ;
 
 	private static Log log = LogFactory.getLog(EncDecrypterImpl.class);

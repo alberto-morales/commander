@@ -51,10 +51,12 @@ public class ServerVO implements Serializable {
 		this.username = username;
 	}
 
+	/*
 	@XmlElement(name="password")
 	public String getPassword() {
 		return password;
 	}
+	*/
 
 	public void setPassword(String password) {
 		this.password = password;

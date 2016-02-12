@@ -31,13 +31,18 @@
 
     <bean id="environmentBuilder" class="com.hpe.commander.services.builder.impl.EnvironmentBuilder" />
 
-    <bean id="configurationUtil" class="com.hpe.commander.util.impl.ConfigurationImpl" />
+    <bean id="configurationUtil" class="com.hpe.commander.util.impl.ConfigurationImpl" >
+        <property name="encDecrypter" ref="encDecrypter" />
+    </bean>
 
     <bean id="serverServiceImpl" class="com.hpe.commander.services.rest.ServerService">
         <property name="catalog" ref="catalog" />
     	<property name="serverBuilder" ref="serverBuilder" />
     	<property name="environmentBuilder" ref="environmentBuilder" />
     	<property name="startableFactory" ref="startableFactory" />
+    	<property name="encDecrypter" ref="encDecrypter" />
     </bean>
+
+    <bean id="encDecrypter" class="com.hpe.commander.util.impl.EncDecrypterImpl" />
 
 </beans>
