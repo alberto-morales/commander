@@ -1,9 +1,11 @@
 package com.hpe.commander.services.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -17,14 +19,30 @@ import com.hpe.commander.model.Startable;
 import com.hpe.commander.model.impl.StartableFactory;
 import com.hpe.commander.services.builder.impl.EnvironmentBuilder;
 import com.hpe.commander.services.builder.impl.ServerBuilder;
+import com.hpe.commander.util.EncDecrypter;
 
 public class ServerService {
 
     @GET
-    @Path("/servers/reload")
+    @Path("/passwords/{plainPassword}/encrypt")
     @Produces("text/plain")
-    @Consumes("application/json")
-    public String reloadServers() {
+    @Consumes("text/plain")
+    public String encryptPassword(@PathParam("plainPassword") String plainPassword) {
+    	return encDecrypter.encrypt(plainPassword);
+    }
+
+    @POST
+    @Path("/passwords/{encryptedPassword}/decrypt")
+    @Produces("text/plain")
+    @Consumes("text/plain")
+    public String decryptPassword(@PathParam("encryptedPassword") String encryptedPassword) {
+    	return encDecrypter.decrypt(encryptedPassword);
+    }
+
+    @GET
+    @Path("/catalogs/reload")
+    @Produces("text/plain")
+    public String reloadCatalogs() {
     	catalog.reload();
 		return "Servers & environments definition file reloaded";
     }
@@ -125,6 +143,9 @@ public class ServerService {
 	public void setStartableFactory(StartableFactory startableFactory) {
 		this.startableFactory = startableFactory;
 	}
+	public void setEncDecrypter(EncDecrypter encDecrypter) {
+		this.encDecrypter = encDecrypter;
+	}
 
 	private ServerDef getServerDefinition(String serverId) {
 		if (serverId == null) return null;
@@ -142,5 +163,6 @@ public class ServerService {
 	private ServerBuilder serverBuilder;
 	private EnvironmentBuilder environmentBuilder;
 	private StartableFactory startableFactory;
+	private EncDecrypter encDecrypter;
 
 }

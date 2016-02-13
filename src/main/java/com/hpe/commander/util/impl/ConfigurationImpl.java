@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -17,6 +19,7 @@ import com.hpe.commander.model.ServerDef;
 import com.hpe.commander.model.impl.EnvironmentDefImpl;
 import com.hpe.commander.model.impl.ServerDefImpl;
 import com.hpe.commander.util.Configuration;
+import com.hpe.commander.util.EncDecrypter;
 
 public class ConfigurationImpl implements Configuration {
 
@@ -55,7 +58,8 @@ public class ConfigurationImpl implements Configuration {
 					String address = eElement.getElementsByTagName("address").item(0).getTextContent();
 					String SSHPort = eElement.getElementsByTagName("SSHPort").item(0).getTextContent();
 					String username = eElement.getElementsByTagName("username").item(0).getTextContent();
-					String password = eElement.getElementsByTagName("password").item(0).getTextContent();
+					String encryptedPassword = eElement.getElementsByTagName("password").item(0).getTextContent();
+					String password = encDecrypter.decrypt(encryptedPassword);
 					String startScript = eElement.getElementsByTagName("startScript").item(0).getTextContent();
 					String stopScript = eElement.getElementsByTagName("stopScript").item(0).getTextContent();
 					ServerDef newServer = new ServerDefImpl(id, description,
@@ -67,7 +71,8 @@ public class ConfigurationImpl implements Configuration {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Error dealing with servers definitions",e);
+			throw new RuntimeException("Error dealing with servers definitions",e);
 		}
 		return result;
 	}
@@ -119,7 +124,8 @@ public class ConfigurationImpl implements Configuration {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Error dealing with environment definitions",e);
+			throw new RuntimeException("Error dealing with environment definitions",e);
 		}
 		return result;
 	}
@@ -127,5 +133,13 @@ public class ConfigurationImpl implements Configuration {
 	private String getConfigFilePath() {
 		return System.getProperty("com.hpe.commander.config-file", "commander-config.xml");
 	}
+
+	public void setEncDecrypter(EncDecrypter encDecrypter) {
+		this.encDecrypter = encDecrypter;
+	}
+
+	private EncDecrypter encDecrypter;
+
+	private static Log log = LogFactory.getLog(ConfigurationImpl.class);
 
 }
