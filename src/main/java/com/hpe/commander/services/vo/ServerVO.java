@@ -11,9 +11,16 @@ public class ServerVO implements Serializable {
 	public ServerVO() {
 	}
 
-	public ServerVO(String id, String description, String address,
-			String username, String password, String startScript,
-			String stopScript) {
+	public ServerVO(String id,
+					String description,
+					String address,
+					String username,
+					String password,
+					String startScript,
+					String stopScript,
+					String aliveScript,
+					String versionScript,
+					String homeURL) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -22,6 +29,36 @@ public class ServerVO implements Serializable {
 		this.password = password;
 		this.startScript = startScript;
 		this.stopScript = stopScript;
+		this.aliveScript = aliveScript;
+		this.versionScript = versionScript;
+		this.homeURL = homeURL;
+	}
+
+	@XmlElement(name="aliveScript")
+	public String getAliveScript() {
+		return aliveScript;
+	}
+
+	public void setAliveScript(String aliveScript) {
+		this.aliveScript = aliveScript;
+	}
+
+	@XmlElement(name="versionScript")
+	public String getVersionScript() {
+		return versionScript;
+	}
+
+	public void setVersionScript(String versionScript) {
+		this.versionScript = versionScript;
+	}
+
+	@XmlElement(name="homeURL")
+	public String getHomeURL() {
+		return homeURL;
+	}
+
+	public void setHomeURL(String homeURL) {
+		this.homeURL = homeURL;
 	}
 
 	@XmlElement(name="description")
@@ -93,9 +130,13 @@ public class ServerVO implements Serializable {
 	private String description;
 	private String address;
 	private String username;
+	@SuppressWarnings("unused")
 	private String password;
 	private String startScript;
 	private String stopScript;
+	private String aliveScript;
+	private String versionScript;
+	private String homeURL;
 	private static final long serialVersionUID = 1L;
 
 }

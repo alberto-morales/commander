@@ -14,7 +14,10 @@ public class ServerDefImpl implements ServerDef {
 						 String username,
 						 String password,
 						 String startScript,
-						 String stopScript) {
+						 String stopScript,
+						 String aliveScript,
+						 String versionScript,
+						 String homeURL) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -24,6 +27,9 @@ public class ServerDefImpl implements ServerDef {
 		hostConfig.setPassword(password);
 		this.startScript = startScript;
 		this.stopScript = stopScript;
+		this.aliveScript = aliveScript;
+		this.versionScript = versionScript;
+		this.homeURL = homeURL;
 	}
 
 	@Override
@@ -46,6 +52,21 @@ public class ServerDefImpl implements ServerDef {
 		return stopScript;
 	}
 
+	@Override
+	public String getAliveScript() {
+		return aliveScript;
+	}
+
+	@Override
+	public String getVersionScript() {
+		return versionScript;
+	}
+
+	@Override
+	public String getHomeURL() {
+		return homeURL;
+	}
+
 	public HostConfigImpl getHostConfig() {
 		return hostConfig;
 	}
@@ -54,6 +75,9 @@ public class ServerDefImpl implements ServerDef {
 	private String description;
 	private String startScript;
 	private String stopScript;
+	private String aliveScript;
+	private String versionScript;
+	private String homeURL;
 	private HostConfigImpl hostConfig = new HostConfigImpl();
 
 }

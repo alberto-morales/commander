@@ -12,7 +12,8 @@ public class EnvironmentBuilder extends AbstractBuilder<EnvironmentDef, Environm
 	public EnvironmentVO build(EnvironmentDef environment) {
 		EnvironmentVO result
 				= new EnvironmentVO(environment.getId(),
-									environment.getDescription());
+									environment.getDescription(),
+									environment.getHomeURL());
 		result.setServers(environment.getServerList());
 		return result;
 	}

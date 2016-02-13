@@ -1,6 +1,5 @@
 package com.hpe.commander.services.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;

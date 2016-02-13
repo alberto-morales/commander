@@ -13,10 +13,20 @@ public class EnvironmentVO implements Serializable {
 	public EnvironmentVO() {
 	}
 
-	public EnvironmentVO(String id, String description) {
+	public EnvironmentVO(String id, String description, String homeURL) {
 		super();
 		this.id = id;
 		this.description = description;
+		this.homeURL = homeURL;
+	}
+
+	@XmlElement(name="homeURL")
+	public String getHomeURL() {
+		return homeURL;
+	}
+
+	public void setHomeURL(String homeURL) {
+		this.homeURL = homeURL;
 	}
 
 	@XmlElement(name="description")
@@ -48,6 +58,8 @@ public class EnvironmentVO implements Serializable {
 
 	private String id;
 	private String description;
+	private String homeURL;
+
 	private List<String> servers = new ArrayList<String>();
 
 	private static final long serialVersionUID = 1L;

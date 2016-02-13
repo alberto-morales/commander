@@ -15,6 +15,11 @@ public interface EnvironmentDef {
 	public abstract String getDescription();
 
 	/**
+	 * @return home URL
+	 */
+	public abstract String getHomeURL();
+
+	/**
 	 * @return list of server-IDs the environment is made up of
 	 */
 	public abstract List<String> getServerList();

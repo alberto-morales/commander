@@ -8,6 +8,9 @@
             <password>xnnNJIuG1JXc8rF00x3Anw==</password>
             <startScript>/home/tucho/startScript1.sh</startScript>
             <stopScript>/home/tucho/stopScript1.sh</stopScript>
+            <aliveScript>/home/tucho/aliveScript1.sh</aliveScript>
+            <versionScript>/home/tucho/stopScript1.sh</versionScript>
+            <homeURL>http://host1:port/contextPath/index.htm</homeURL>
         </server>
         <server id="server-2">
             <description>UBUNTU VirtualBox local 2</description>
@@ -17,11 +20,15 @@
             <password>xnnNJIuG1JXc8rF00x3Anw==</password>
             <startScript>/home/tucho/startScript2.sh</startScript>
             <stopScript>/home/tucho/stopScript2.sh</stopScript>
+            <aliveScript>/home/tucho/aliveScript2.sh</aliveScript>
+            <versionScript>/home/tucho/stopScript2.sh</versionScript>
+            <homeURL>http://host2:port/contextPath/index.htm</homeURL>
         </server>
     </servers>
     <environments>
         <environment id="env-1">
-            <description>environment-1</description>            
+            <description>environment-1</description>
+            <homeURL>http://env1:port/contextPath/index.htm</homeURL>
             <server-ref>
                 <id>server-1</id>
             </server-ref>

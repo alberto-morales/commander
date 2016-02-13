@@ -23,6 +23,21 @@ public interface ServerDef {
 	public abstract String getStopScript();
 
 	/**
+	 * @return alive script (full path)
+	 */
+	public abstract String getAliveScript();
+
+	/**
+	 * @return version script (full path)
+	 */
+	public abstract String getVersionScript();
+
+	/**
+	 * @return home URL
+	 */
+	public abstract String getHomeURL();
+
+	/**
 	 * @return Host Configuration
 	 */
 	public abstract HostConfig getHostConfig();

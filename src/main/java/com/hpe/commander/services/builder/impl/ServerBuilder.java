@@ -16,7 +16,11 @@ public class ServerBuilder extends AbstractBuilder<ServerDef, ServerVO> implemen
 									   server.getHostConfig().getUsername(),
 									   server.getHostConfig().getPassword(),
 									   server.getStartScript(),
-									   server.getStopScript());
+									   server.getStopScript(),
+									   server.getAliveScript(),
+									   server.getVersionScript(),
+									   server.getHomeURL()
+									   );
 		return result;
 	}
 

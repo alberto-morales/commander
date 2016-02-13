@@ -23,6 +23,24 @@ import com.hpe.commander.util.EncDecrypter;
 
 public class ConfigurationImpl implements Configuration {
 
+	private static final String ENV_TAG_SERVER_REF = "server-ref";
+	private static final String ENV_TAG_ID = "id";
+	private static final String ENV_TAG_ENVIRONMENT = "environment";
+	private static final String ENV_TAG_DESCRIPTION = "description";
+	private static final String ENV_TAG_HOME_URL = "homeURL";
+
+	private static final String SERVER_TAG_HOME_URL = "homeURL";
+	private static final String SERVER_TAG_VERSION_SCRIPT = "versionScript";
+	private static final String SERVER_TAG_ALIVE_SCRIPT = "aliveScript";
+	private static final String SERVER_TAG_STOP_SCRIPT = "stopScript";
+	private static final String SERVER_TAG_START_SCRIPT = "startScript";
+	private static final String SERVER_TAG_PASSWORD = "password";
+	private static final String SERVER_TAG_USERNAME = "username";
+	private static final String SERVER_TAG_SSH_PORT = "SSHPort";
+	private static final String SERVER_TAG_ADDRESS = "address";
+	private static final String SERVER_TAG_DESCRIPTION = "description";
+	private static final String SERVER_TAG_SERVER = "server";
+
 	/* (non-Javadoc)
 	 * @see com.hpe.commander.util.Configuration#getServerDefinitions()
 	 */
@@ -46,26 +64,36 @@ public class ConfigurationImpl implements Configuration {
 			//Element root = document.getDocumentElement();
 
 			//Get all servers
-			NodeList nList = document.getElementsByTagName("server");
+			NodeList nList = document.getElementsByTagName(SERVER_TAG_SERVER);
 
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 				    //Deal with each server's detail
 					Element eElement = (Element) node;
-					String id = eElement.getAttribute("id");
-					String description = eElement.getElementsByTagName("description").item(0).getTextContent();
-					String address = eElement.getElementsByTagName("address").item(0).getTextContent();
-					String SSHPort = eElement.getElementsByTagName("SSHPort").item(0).getTextContent();
-					String username = eElement.getElementsByTagName("username").item(0).getTextContent();
-					String encryptedPassword = eElement.getElementsByTagName("password").item(0).getTextContent();
+					String id = eElement.getAttribute(ENV_TAG_ID);
+					String description = eElement.getElementsByTagName(SERVER_TAG_DESCRIPTION).item(0).getTextContent();
+					String address = eElement.getElementsByTagName(SERVER_TAG_ADDRESS).item(0).getTextContent();
+					String SSHPort = eElement.getElementsByTagName(SERVER_TAG_SSH_PORT).item(0).getTextContent();
+					String username = eElement.getElementsByTagName(SERVER_TAG_USERNAME).item(0).getTextContent();
+					String encryptedPassword = eElement.getElementsByTagName(SERVER_TAG_PASSWORD).item(0).getTextContent();
 					String password = encDecrypter.decrypt(encryptedPassword);
-					String startScript = eElement.getElementsByTagName("startScript").item(0).getTextContent();
-					String stopScript = eElement.getElementsByTagName("stopScript").item(0).getTextContent();
-					ServerDef newServer = new ServerDefImpl(id, description,
-															address, Integer.valueOf(SSHPort),
-															username, password,
-															startScript, stopScript);
+					String startScript = eElement.getElementsByTagName(SERVER_TAG_START_SCRIPT).item(0).getTextContent();
+					String stopScript = eElement.getElementsByTagName(SERVER_TAG_STOP_SCRIPT).item(0).getTextContent();
+					String aliveScript = eElement.getElementsByTagName(SERVER_TAG_ALIVE_SCRIPT).item(0).getTextContent();
+					String versionScript = eElement.getElementsByTagName(SERVER_TAG_VERSION_SCRIPT).item(0).getTextContent();
+					String homeURL = eElement.getElementsByTagName(SERVER_TAG_HOME_URL).item(0).getTextContent();
+					ServerDef newServer = new ServerDefImpl(id,
+															description,
+															address,
+															Integer.valueOf(SSHPort),
+															username,
+															password,
+															startScript,
+															stopScript,
+															aliveScript,
+															versionScript,
+															homeURL);
 					result.put(id,  newServer);
 				}
 			}
@@ -100,22 +128,23 @@ public class ConfigurationImpl implements Configuration {
 			//Element root = document.getDocumentElement();
 
 			//Get all servers
-			NodeList nList = document.getElementsByTagName("environment");
+			NodeList nList = document.getElementsByTagName(ENV_TAG_ENVIRONMENT);
 
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 				    //Deal with each environment's detail
 					Element eElement = (Element) node;
-					String id = eElement.getAttribute("id");
-					String description = eElement.getElementsByTagName("description").item(0).getTextContent();
-					EnvironmentDef newEnvironment = new EnvironmentDefImpl(id, description);
-					NodeList children = eElement.getElementsByTagName("server-ref");
+					String id = eElement.getAttribute(ENV_TAG_ID);
+					String description = eElement.getElementsByTagName(ENV_TAG_DESCRIPTION).item(0).getTextContent();
+					String homeURL = eElement.getElementsByTagName(ENV_TAG_HOME_URL).item(0).getTextContent();
+					EnvironmentDef newEnvironment = new EnvironmentDefImpl(id, description, homeURL);
+					NodeList children = eElement.getElementsByTagName(ENV_TAG_SERVER_REF);
 					for (int j = 0; j < children.getLength(); j++) {
 						Node child = children.item(j);
 						if (child.getNodeType() == Node.ELEMENT_NODE) {
 							Element eChild = (Element) child;
-							String idServer = eChild.getElementsByTagName("id").item(0).getTextContent();
+							String idServer = eChild.getElementsByTagName(ENV_TAG_ID).item(0).getTextContent();
 							newEnvironment.addServer(idServer);
 						}
 					}
