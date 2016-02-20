@@ -32,6 +32,7 @@ public class ConfigurationImpl implements Configuration {
 	private static final String SERVER_TAG_HOME_URL = "homeURL";
 	private static final String SERVER_TAG_VERSION_SCRIPT = "versionScript";
 	private static final String SERVER_TAG_ALIVE_SCRIPT = "aliveScript";
+	private static final String SERVER_TAG_DEPLOY_SCRIPT = "deployScript";
 	private static final String SERVER_TAG_STOP_SCRIPT = "stopScript";
 	private static final String SERVER_TAG_START_SCRIPT = "startScript";
 	private static final String SERVER_TAG_PASSWORD = "password";
@@ -80,6 +81,7 @@ public class ConfigurationImpl implements Configuration {
 					String password = encDecrypter.decrypt(encryptedPassword);
 					String startScript = eElement.getElementsByTagName(SERVER_TAG_START_SCRIPT).item(0).getTextContent();
 					String stopScript = eElement.getElementsByTagName(SERVER_TAG_STOP_SCRIPT).item(0).getTextContent();
+					String deployScript = eElement.getElementsByTagName(SERVER_TAG_DEPLOY_SCRIPT).item(0).getTextContent();
 					String aliveScript = eElement.getElementsByTagName(SERVER_TAG_ALIVE_SCRIPT).item(0).getTextContent();
 					String versionScript = eElement.getElementsByTagName(SERVER_TAG_VERSION_SCRIPT).item(0).getTextContent();
 					String homeURL = eElement.getElementsByTagName(SERVER_TAG_HOME_URL).item(0).getTextContent();
@@ -91,6 +93,7 @@ public class ConfigurationImpl implements Configuration {
 															password,
 															startScript,
 															stopScript,
+															deployScript,
 															aliveScript,
 															versionScript,
 															homeURL);

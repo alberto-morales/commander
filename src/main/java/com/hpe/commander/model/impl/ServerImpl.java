@@ -19,8 +19,14 @@ public class ServerImpl implements Server {
 
 	@Override
 	public String stop() {
-		// TODO Auto-generated method stub
 		return commandRunner.run(serverConfiguration.getStopScript(),
+						  		 serverConfiguration.getHostConfig());
+	}
+
+
+	@Override
+	public String deploy() {
+		return commandRunner.run(serverConfiguration.getDeployScript(),
 						  		 serverConfiguration.getHostConfig());
 	}
 

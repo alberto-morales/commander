@@ -1,6 +1,6 @@
 package com.hpe.commander.model;
 
-public interface Server extends Startable {
+public interface Server extends Startable, Deployable {
 
 	/**
 	 * @return server Description

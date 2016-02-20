@@ -23,6 +23,11 @@ public interface ServerDef {
 	public abstract String getStopScript();
 
 	/**
+	 * @return deploy script (full path)
+	 */
+	public abstract String getDeployScript();
+
+	/**
 	 * @return alive script (full path)
 	 */
 	public abstract String getAliveScript();

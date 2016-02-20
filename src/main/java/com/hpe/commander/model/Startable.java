@@ -4,13 +4,13 @@ public interface Startable {
 
 	/**
 	 * Starts the server
-	 * @return resultado de la operacion	 *
+	 * @return operation result
 	 */
 	public String start();
 
 	/**
 	 * Stops the server
-	 * @return resultado de la operacion
+	 * @return operation result
 	 */
 	public String stop();
 }
