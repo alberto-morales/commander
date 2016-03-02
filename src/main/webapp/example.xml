@@ -2,7 +2,7 @@
     <servers>
         <server id="server-1">
             <description>UBUNTU VirtualBox local 1</description>
-            <address>192.168.1.134</address>
+            <address>192.168.56.101</address>
             <SSHPort>22</SSHPort>
             <username>tucho</username>
             <password>xnnNJIuG1JXc8rF00x3Anw==</password>
@@ -15,7 +15,7 @@
         </server>
         <server id="server-2">
             <description>UBUNTU VirtualBox local 2</description>
-            <address>192.168.1.134</address>
+            <address>192.168.56.101</address>
             <SSHPort>22</SSHPort>
             <username>tucho</username>
             <password>xnnNJIuG1JXc8rF00x3Anw==</password>

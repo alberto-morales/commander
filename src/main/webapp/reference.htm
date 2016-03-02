@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>Commander's REST API - Reference guide</title>
+</head>
+<body>
+<table>
+<tr>
+	<td>Query to get the list of defined server instances</td>
+	<td>http://[host]:[port]/commander/rest/servers</td>
+</tr>
+<tr>
+	<td>Obtain a complete set of server details (with alive status and version, if capable)</td>
+	<td>http://[host]:[port]/commander/rest/servers/[server_id]</td>
+</tr>
+<tr>
+	<td>Start a server</td>
+	<td>http://[host]:[port]/commander/rest/servers/[server_id]/start</td>
+</tr>
+<tr>
+	<td>Stop a server</td>
+	<td>http://[host]:[port]/commander/rest/servers/[server_id]/stop</td>
+</tr>
+<tr>
+	<td>Deploy your app to a server instance</td>
+	<td>http://[host]:[port]/commander/rest/servers/[server_id]/deploy</td>
+</tr>
+<tr>
+	<td>Query to get the list of defined environment instances</td>
+	<td>http://[host]:[port]/commander/rest/environments</td>
+</tr>
+<tr>
+	<td>Obtain a complete set of environment details</td>
+	<td>http://[host]:[port]/commander/rest/environments/[environment_id]</td>
+</tr>
+<tr>
+	<td>Start a whole environment</td>
+	<td>http://[host]:[port]/commander/rest/environments/[environment_id]/start</td>
+</tr>
+<tr>
+	<td>Stop a wholes environment</td>
+	<td>http://[host]:[port]/commander/rest/environments/[environment_id]/stop</td>
+</tr>
+<tr>
+	<td>Reload servers and environments catalog</td>
+	<td>http://[host]:[port]/commander/rest/catalogs/reload</td>
+</tr>
+<tr>
+	<td>Encrypt a password to use it inside the commander configuration file</td>
+	<td>http://[host]:[port]/commander/rest/passwords/[password_to_be_encrypted]/encrypt</td>
+</tr>
+</table>
+</body>
+</html>

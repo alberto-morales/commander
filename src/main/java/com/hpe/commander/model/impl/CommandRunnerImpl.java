@@ -6,6 +6,9 @@ import com.hpe.commander.model.HostConfig;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
@@ -19,6 +22,7 @@ public class CommandRunnerImpl implements CommandRunner {
 		Session session = null;
 		ChannelExec channel = null;
 	    try {
+	    	log.info("Running command '"+command+"' on server '"+hostConfig.getAddress()+"'");
 	        session = jsch.getSession(hostConfig.getUsername(),
 	        								  hostConfig.getAddress(),
 	        								  hostConfig.getSSHPort());
@@ -31,22 +35,29 @@ public class CommandRunnerImpl implements CommandRunner {
 	        channel.setCommand(command+";");
 	        channel.connect();
 
-	        String msg=null;
+	    	log.debug("(connected) Running command '"+command+"' on server '"+hostConfig.getAddress()+"'");
+
+	    	String msg=null;
 	        while((msg=in.readLine())!=null){
 	        	result += msg;
 	        }
 
+	    	log.debug("(finished) Running command '"+command+"' on server '"+hostConfig.getAddress()+"'");
+
 	    } catch (Exception e) {
-	    	e.printStackTrace();
+	    	log.warn("(Exception) Running command '"+command+"' on server '"+hostConfig.getAddress()+"'", e);
+	    	result = e.getMessage();
 	    } finally {
 	    	try {
 		        channel.disconnect();
 		        session.disconnect();
 	    	} catch (Exception e) {
-	    		e.printStackTrace();
+	    		log.error(e);
 	    	}
 	    }
 	    return result;
 	}
+
+	private static Log log = LogFactory.getLog(CommandRunnerImpl.class);
 
 }

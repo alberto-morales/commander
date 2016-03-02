@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -30,14 +29,14 @@ public class ServerService {
     	return encDecrypter.encrypt(plainPassword);
     }
 
-    @POST
-    @Path("/passwords/{encryptedPassword}/decrypt")
-    @Produces("text/plain")
-    @Consumes("text/plain")
-    public String decryptPassword(@PathParam("encryptedPassword") String encryptedPassword) {
-    	return encDecrypter.decrypt(encryptedPassword);
-    }
-
+//    @POST
+//    @Path("/passwords/{encryptedPassword}/decrypt")
+//    @Produces("text/plain")
+//    @Consumes("text/plain")
+//    public String decryptPassword(@PathParam("encryptedPassword") String encryptedPassword) {
+//    	return encDecrypter.decrypt(encryptedPassword);
+//    }
+//
     @GET
     @Path("/catalogs/reload")
     @Produces("text/plain")
@@ -62,7 +61,7 @@ public class ServerService {
     public ServerVO getServer(@PathParam("serverId") String serverId) {
     	ServerDef serverConfig = getServerDefinition(serverId);
     	if (serverConfig == null) return null;
-    	ServerVO result = serverBuilder.build(serverConfig);
+    	ServerVO result = serverBuilderEnhanced.build(serverConfig);
 		return result;
     }
 
@@ -136,6 +135,9 @@ public class ServerService {
 	public void setServerBuilder(ServerBuilder serverBuilder) {
 		this.serverBuilder = serverBuilder;
 	}
+	public void setServerBuilderEnhanced(ServerBuilder serverBuilderEnhanced) {
+		this.serverBuilderEnhanced = serverBuilderEnhanced;
+	}
 	public void setEnvironmentBuilder(EnvironmentBuilder environmentBuilder) {
 		this.environmentBuilder = environmentBuilder;
 	}
@@ -160,6 +162,7 @@ public class ServerService {
 
     private Catalog catalog;
 	private ServerBuilder serverBuilder;
+	private ServerBuilder serverBuilderEnhanced;
 	private EnvironmentBuilder environmentBuilder;
 	private StartableFactory startableFactory;
 	private EncDecrypter encDecrypter;

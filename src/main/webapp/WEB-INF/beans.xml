@@ -29,6 +29,8 @@
 
     <bean id="serverBuilder" class="com.hpe.commander.services.builder.impl.ServerBuilder" />
 
+    <bean id="serverBuilderEnhanced" class="com.hpe.commander.services.builder.impl.ServerBuilderEnhanced" />
+
     <bean id="environmentBuilder" class="com.hpe.commander.services.builder.impl.EnvironmentBuilder" />
 
     <bean id="configurationUtil" class="com.hpe.commander.util.impl.ConfigurationImpl" >
@@ -38,6 +40,7 @@
     <bean id="serverServiceImpl" class="com.hpe.commander.services.rest.ServerService">
         <property name="catalog" ref="catalog" />
     	<property name="serverBuilder" ref="serverBuilder" />
+    	<property name="serverBuilderEnhanced" ref="serverBuilderEnhanced" />
     	<property name="environmentBuilder" ref="environmentBuilder" />
     	<property name="startableFactory" ref="startableFactory" />
     	<property name="encDecrypter" ref="encDecrypter" />

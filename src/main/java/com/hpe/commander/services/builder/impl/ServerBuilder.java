@@ -9,6 +9,7 @@ public class ServerBuilder extends AbstractBuilder<ServerDef, ServerVO> implemen
 	/* (non-Javadoc)
 	 * @see com.hpe.commander.services.builder.impl.ObjectBuilder#build(java.lang.Object)
 	 */
+	@Override
 	public ServerVO build(ServerDef server) {
 		ServerVO result = new ServerVO(server.getId(),
 									   server.getDescription(),
@@ -17,8 +18,6 @@ public class ServerBuilder extends AbstractBuilder<ServerDef, ServerVO> implemen
 									   server.getHostConfig().getPassword(),
 									   server.getStartScript(),
 									   server.getStopScript(),
-									   server.getAliveScript(),
-									   server.getVersionScript(),
 									   server.getHomeURL()
 									   );
 		return result;
