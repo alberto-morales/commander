@@ -19,25 +19,25 @@
 		</jaxrs:providers>
   </jaxrs:server>
 
-    <bean id="catalog" class="com.hpe.commander.model.impl.CatalogImpl" >
+    <bean id="catalog" class="eu.albertomorales.commander.model.impl.CatalogImpl" >
         <property name="configuration" ref="configurationUtil" />
     </bean>
 
-    <bean id="startableFactory" class="com.hpe.commander.model.impl.StartableFactoryImpl" >
+    <bean id="startableFactory" class="eu.albertomorales.commander.model.impl.StartableFactoryImpl" >
         <property name="catalog" ref="catalog" />
     </bean>
 
-    <bean id="serverBuilder" class="com.hpe.commander.services.builder.impl.ServerBuilder" />
+    <bean id="serverBuilder" class="eu.albertomorales.commander.services.builder.impl.ServerBuilder" />
 
-    <bean id="serverBuilderEnhanced" class="com.hpe.commander.services.builder.impl.ServerBuilderEnhanced" />
+    <bean id="serverBuilderEnhanced" class="eu.albertomorales.commander.services.builder.impl.ServerBuilderEnhanced" />
 
-    <bean id="environmentBuilder" class="com.hpe.commander.services.builder.impl.EnvironmentBuilder" />
+    <bean id="environmentBuilder" class="eu.albertomorales.commander.services.builder.impl.EnvironmentBuilder" />
 
-    <bean id="configurationUtil" class="com.hpe.commander.util.impl.ConfigurationImpl" >
+    <bean id="configurationUtil" class="eu.albertomorales.commander.util.impl.ConfigurationImpl" >
         <property name="encDecrypter" ref="encDecrypter" />
     </bean>
 
-    <bean id="serverServiceImpl" class="com.hpe.commander.services.rest.ServerService">
+    <bean id="serverServiceImpl" class="eu.albertomorales.commander.services.rest.ServerService">
         <property name="catalog" ref="catalog" />
     	<property name="serverBuilder" ref="serverBuilder" />
     	<property name="serverBuilderEnhanced" ref="serverBuilderEnhanced" />
@@ -46,6 +46,6 @@
     	<property name="encDecrypter" ref="encDecrypter" />
     </bean>
 
-    <bean id="encDecrypter" class="com.hpe.commander.util.impl.EncDecrypterImpl" />
+    <bean id="encDecrypter" class="eu.albertomorales.commander.util.impl.EncDecrypterImpl" />
 
 </beans>
