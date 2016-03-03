@@ -1,0 +1,108 @@
+
+About
+=====
+
+Just an incredibly simple way to start/stop any server instance, from the same place.
+
+Our team is responsible for deploying onto, starting and and stopping test servers. Sometimes the servers don't respond and you need to restart them. You can contact us or, with the help of "COMMANDER", do it by yourself.
+
+A brief overview
+================
+
+"COMMANDER" is a simple web module that offers you a REST API to manage (for the moment, start, stop and deploy onto) a previously defined set of server instances. This API defines a set of functions which users can:
+
+Query to get the list of defined server or environment instances
+
+http://[host]:[port]/commander/rest/servers
+http://[host]:[port]/commander/rest/environments
+
+How to start a server
+http://[host]:[port]/commander/rest/servers/[server_id]/start
+
+How to stop a server
+http://[host]:[port]/commander/rest/servers/[server_id]/stop
+
+How to deploy your app to a server instance
+http://[host]:[port]/commander/rest/servers/[server_id]/deploy
+
+A lot of additional operations are also available and appearing in greater number every day.
+
+Additionally "COMMANDER" has a home page (index.html), to access them all. It is only a matter of time before new functions arise, or new clients (python, android, iOS, etc...) be created.
+
+A complete reference can be found here:
+=======================================
+
+Query to get the list of defined server instances
+	http://[host]:[port]/commander/rest/servers
+Obtain a complete set of server details (with alive status and version, if capable)
+	http://[host]:[port]/commander/rest/servers/[server_id]
+Start a server
+	http://[host]:[port]/commander/rest/servers/[server_id]/start
+Stop a server
+	http://[host]:[port]/commander/rest/servers/[server_id]/stop
+Deploy your app to a server instance
+	http://[host]:[port]/commander/rest/servers/[server_id]/deploy
+Query to get the list of defined environment instances
+	http://[host]:[port]/commander/rest/environments
+Obtain a complete set of environment details
+	http://[host]:[port]/commander/rest/environments/[environment_id]
+Start a whole environment
+	http://[host]:[port]/commander/rest/environments/[environment_id]/start
+Stop a wholes environment
+	http://[host]:[port]/commander/rest/environments/[environment_id]/stop
+Reload servers and environments catalog
+	http://[host]:[port]/commander/rest/catalogs/reload
+Encrypt a password to use it inside the commander configuration file
+	http://[host]:[port]/commander/rest/passwords/[password_to_be_encrypted]/encrypt
+
+Configuration
+=============
+
+In order to use "COMANDER", the servers definition file path must be referenced as a JVM system property:
+
+-Dcom.hpe.commander.config-file=[file-path]/commander-config.xml
+
+You can find an example of this file here
+
+<commander-config>
+    <servers>
+        <server id="server-1">
+            <description>UBUNTU VirtualBox local 1</description>
+            <address>192.168.56.101</address>
+            <SSHPort>22</SSHPort>
+            <username>tucho</username>
+            <password>xnnNJIuG1JXc8rF00x3Anw==</password>
+            <startScript>/home/tucho/startScript1.sh</startScript>
+            <stopScript>/home/tucho/stopScript1.sh</stopScript>
+            <deployScript>/home/tucho/deployScript1.sh</deployScript>
+            <aliveScript>/home/tucho/aliveScript1.sh</aliveScript>
+            <versionScript>/home/tucho/stopScript1.sh</versionScript>
+            <homeURL>http://host1:port/contextPath/index.htm</homeURL>
+        </server>
+        <server id="server-2">
+            <description>UBUNTU VirtualBox local 2</description>
+            <address>192.168.56.101</address>
+            <SSHPort>22</SSHPort>
+            <username>tucho</username>
+            <password>xnnNJIuG1JXc8rF00x3Anw==</password>
+            <startScript>/home/tucho/startScript2.sh</startScript>
+            <stopScript>/home/tucho/stopScript2.sh</stopScript>
+            <deployScript>/home/tucho/deployScript2.sh</deployScript>
+            <aliveScript>/home/tucho/aliveScript2.sh</aliveScript>
+            <versionScript>/home/tucho/stopScript2.sh</versionScript>
+            <homeURL>http://host2:port/contextPath/index.htm</homeURL>
+        </server>
+    </servers>
+    <environments>
+        <environment id="env-1">
+            <description>environment-1</description>
+            <homeURL>http://env1:port/contextPath/index.htm</homeURL>
+            <server-ref>
+                <id>server-1</id>
+            </server-ref>
+            <server-ref>
+                <id>server-2</id>
+            </server-ref>
+        </environment>
+    </environments>
+</commander-config>
