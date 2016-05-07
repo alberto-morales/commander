@@ -11,6 +11,7 @@
 	      <ref bean="serverServiceImpl" />
 	    </jaxrs:serviceBeans>
 		<jaxrs:providers>
+		    <ref bean="cors-filter" />
             <bean class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
                 <property name="dropRootElement" value="true" />
                 <property name="serializeAsArray" value="true" />
@@ -18,6 +19,8 @@
             </bean>
 		</jaxrs:providers>
   </jaxrs:server>
+
+  	<bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
 
     <bean id="catalog" class="eu.albertomorales.commander.model.impl.CatalogImpl" >
         <property name="configuration" ref="configurationUtil" />

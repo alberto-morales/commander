@@ -8,6 +8,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+
 import eu.albertomorales.commander.services.vo.EnvironmentVO;
 import eu.albertomorales.commander.services.vo.ServerVO;
 import eu.albertomorales.commander.model.EnvironmentDef;
@@ -19,6 +21,11 @@ import eu.albertomorales.commander.services.builder.impl.EnvironmentBuilder;
 import eu.albertomorales.commander.services.builder.impl.ServerBuilder;
 import eu.albertomorales.commander.util.EncDecrypter;
 
+@CrossOriginResourceSharing(
+		allowAllOrigins = true,
+        allowCredentials = true,
+        maxAge = 1209600
+)
 public class ServerService {
 
     @GET
