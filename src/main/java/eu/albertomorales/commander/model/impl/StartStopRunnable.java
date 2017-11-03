@@ -11,9 +11,9 @@ public class StartStopRunnable implements Runnable {
 	@Override
 	public void run() {
 		started = true;
-		if (operation.equals(Operation.START)) {
+		if (Operation.START.equals(operation)) {
 			result = server.start();
-		} else if (operation.equals(Operation.STOP)) {
+		} else if (Operation.STOP.equals(operation)) {
 			result = server.stop();
 		}
 		finished = true;
