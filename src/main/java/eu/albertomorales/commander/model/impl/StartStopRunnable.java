@@ -8,6 +8,17 @@ enum Operation {
 
 public class StartStopRunnable implements Runnable {
 
+	@Override
+	public void run() {
+		started = true;
+		if (operation.equals(Operation.START)) {
+			result = server.start();
+		} else if (operation.equals(Operation.STOP)) {
+			result = server.stop();
+		}
+		finished = true;
+	}
+
 	public StartStopRunnable(Server server, Operation operation) {
 		super();
 		this.server = server;
@@ -28,17 +39,6 @@ public class StartStopRunnable implements Runnable {
 
 	public boolean isFinished() {
 		return finished;
-	}
-
-	@Override
-	public void run() {
-		started = true;
-		if (operation.equals(Operation.START)) {
-			result = server.start();
-		} else if (operation.equals(Operation.STOP)) {
-			result = server.stop();
-		}
-		finished = true;
 	}
 
 	private final Server server;
